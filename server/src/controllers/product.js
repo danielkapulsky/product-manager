@@ -51,7 +51,6 @@ export const deleteProductById = async (req,res) => {
 export const editProductById = async (req,res) => {
     const {id} = req.params;
     const {name, price} = req.body;
-    
     try{
         const editedProduct = await Product.findByIdAndUpdate(id,{name,price}, {returnOriginal: false});
         if(!editedProduct) return res.status(404).json({message:"id not found"});
