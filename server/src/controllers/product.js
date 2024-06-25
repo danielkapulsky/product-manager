@@ -4,7 +4,7 @@ export const getProducts = async (req,res) => {
     
     try {
         const productList =  await Product.find();
-        res.status(200).json({data:productList});
+        res.status(200).json({products:productList});
         
     } catch (error) {
         res.status(400).json({message:error.message});
@@ -25,10 +25,10 @@ export const createProduct = async (req,res) => {
         name: req.body.name,
         price: req.body.price,
     });
-
     try {
         const newProduct = await product.save();
-        res.status(201).json({message:"product added successfully", data:newProduct})
+        const productList =  await Product.find();
+        res.status(201).json({message:"product added successfully", newProduct, products: productList});
     } catch (error) {
         res.status(400).json({message:error.message})
     }
@@ -42,7 +42,7 @@ export const deleteProductById = async (req,res) => {
         if(!deletedProduct) return res.status(404).json({message:"product not found"});
         const updatedProducts = await Product.find();
 
-        res.status(200).json({message: `product with id ${id} deleted successfully`, data: {deletedProduct, products: updatedProducts}});
+        res.status(200).json({message: `product with id ${id} deleted successfully`, deletedProduct,products: updatedProducts});
     } catch (error) {
         res.status(400).json({message:error.message})
     }
