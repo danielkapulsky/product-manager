@@ -1,8 +1,14 @@
-import React from 'react'
+import { useParams } from "react-router-dom"
+import "./ItemPage.scss"
 
 const ItemPage = () => {
+  const {id} = useParams();
+
   return (
-    <div>ItemPage</div>
+    <div className="item-container">
+          <ul>
+          </ul>
+    </div>
   )
 }
 

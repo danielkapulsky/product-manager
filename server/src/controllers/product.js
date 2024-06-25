@@ -11,6 +11,19 @@ export const getProducts = async (req,res) => {
     }
 }
 
+export const getProductById = async (req,res) => {
+    const {id} = req.params;
+    if(!id) res.status(404).json({message:"product not found"});
+
+    try {
+        const product =  await Product.find({_id:id});
+        res.status(200).json({message: `product found by id: ${id}`,product: product});
+        
+    } catch (error) {
+        res.status(400).json({message:error.message});
+    }
+}
+
 export const deleteProducts = async (req,res) => {
     try{
         const productList = await Product.deleteMany({});

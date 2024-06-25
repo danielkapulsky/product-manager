@@ -1,4 +1,4 @@
-import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { IProduct } from '../../../interfaces/interfaces'
 
 
@@ -8,7 +8,12 @@ interface ProductItemProps {
 }
 
 const ProductItem = ({ product, deleteById }: ProductItemProps) => {
-    console.log(product)
+    const navigate = useNavigate();
+
+    const handleInfoClick = () => {
+        navigate(`/${product._id}`);
+    }
+    
     return (
         <div className='product-container'>
             <div className='content'>
@@ -17,7 +22,7 @@ const ProductItem = ({ product, deleteById }: ProductItemProps) => {
             </div>
             <div className='buttons'>
                 <button onClick={() => deleteById(product._id)}>Delete</button>
-                <button>Info</button>
+                <button onClick={handleInfoClick}>Info</button>
             </div>
         </div>
     )
